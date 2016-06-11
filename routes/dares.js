@@ -30,15 +30,10 @@ router.post('/create', function(req,res,next){
 	
 	var newDare = new Dare({
 		statement : req.body.statement,
-		challanged_by : req.body.challanged_by,
-		challanged_to : req.body.challanged_to,
-		deadline_acceptance : req.body.deadline_acceptance,
+		challenged_by : req.body.challenged_by,
+		challenged_to : req.body.challenged_to,
 		deadline_completion : req.body.deadline_completion,
-		sample_giffy : req.body.sample_giffy,
-		video_link : req.body.video_link,
-		completed : req.body.completed,
-		accepted : req.body.accepted,
-		upvotes : req.body.upvotes
+		sample_giffy : req.body.sample_giffy
 	});
 
 	newDare.save(function(err){
@@ -52,6 +47,30 @@ router.post('/create', function(req,res,next){
 			});
 		}
 	})
+});
+
+router.get('/upvote/:id', function(req,res,next){
+	Dare.findById(req.params.id, function(err,dare){
+		if(err) {
+			res.send(err);
+		}
+
+		dare.upvotes = dare.upvotes + 1;
+		dare.save(function(err){
+			if(err) {
+				res.send(err);
+				console.log("Error while saving dare.");
+			}
+
+			else {
+				res.json({
+					message : "Upvoted successfully",
+					data : dare
+				});
+			}
+		});
+		console.log('upvotes = ' + dare.upvotes);
+	});
 });
 
 

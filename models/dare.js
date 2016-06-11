@@ -5,17 +5,17 @@ var dareSchema = new mongoose.Schema({
 		type : String,
 		required : true
 	},
-	challanged_by : {
+	challenged_by : {
 		type : String,
 		required : true	
 	},
-	challanged_to : {
+	challenged_to : {
 		type : String,
 		required : true
 	},
 	deadline_acceptance : {
 		type : String,
-		required : true
+		default : 2
 	},
 	deadline_completion : {
 		type : String,

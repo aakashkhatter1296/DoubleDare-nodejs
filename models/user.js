@@ -9,6 +9,10 @@ var userSchema = new mongoose.Schema({
 		type : String,
 		required : true
 	},
+	username : {
+		type : String,
+		required : true
+	},
 	fcm_playerid : {
 		type : String,
 		default : "null"
