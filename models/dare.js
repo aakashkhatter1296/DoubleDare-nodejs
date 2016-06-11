@@ -36,10 +36,9 @@ var dareSchema = new mongoose.Schema({
 		type : Boolean,
 		default : false
 	},
-	upvotes : {
-		type : Number,
-		default : 0
-	},
+	upvotes : [{
+		user_id : String
+	}],
 	bids : [{
 		user_id : String,
 		bid_amount : Number,

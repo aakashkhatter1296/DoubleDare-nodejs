@@ -49,13 +49,16 @@ router.post('/create', function(req,res,next){
 	})
 });
 
-router.get('/upvote/:id', function(req,res,next){
-	Dare.findById(req.params.id, function(err,dare){
+router.post('/upvote/', function(req,res,next){
+	var obj = {
+		user_id : req.body.user_id
+	};
+	Dare.findOneAndUpdate({_id : req.body.dare_id}, { $push : {obj} },function(err,dare){
 		if(err) {
 			res.send(err);
 		}
 
-		dare.upvotes = dare.upvotes + 1;
+		
 		dare.save(function(err){
 			if(err) {
 				res.send(err);
